@@ -139,7 +139,7 @@ const Features = () => {
             <img
               src={FeatureImg4}
               alt="Feature 1"
-              className="w-full h-44 sm:h-32 md:h-40 object-cover rounded"
+              className="w-full h-44 sm:h-32 md:h-68 object-cover rounded"
             />
           </motion.div>
           <motion.div 
