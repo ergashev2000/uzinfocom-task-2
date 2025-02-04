@@ -2,11 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { api } from "../services/api";
 import { useState } from "react";
+import { useRatings } from "../context/RatingsContext";
 
 const Ratings = () => {
   const { t } = useTranslation();
   const [sortColumn, setSortColumn] = useState<number | null>(null);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
+  const { counts } = useRatings();
 
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
@@ -16,11 +18,6 @@ const Ratings = () => {
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],
     queryFn: api.getCategories,
-  });
-
-  const { data: counts = [] } = useQuery({
-    queryKey: ["counts"],
-    queryFn: api.getCounts,
   });
 
   const getCountForUserAndCategory = (userId: number, categoryId: number) => {

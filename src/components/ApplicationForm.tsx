@@ -4,12 +4,15 @@ import { api } from "../services/api";
 import { useState } from "react";
 import Button from "./commons/Button";
 import { ChevronDown } from "lucide-react";
+import { useRatings } from "../context/RatingsContext";
+import toast from "react-hot-toast";
 
 const ApplicationForm = () => {
   const { t } = useTranslation();
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [count, setCount] = useState("");
+  const { updateCount } = useRatings();
 
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
@@ -28,37 +31,43 @@ const ApplicationForm = () => {
 
   const handleUserChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedUser(e.target.value);
-    updateCount(e.target.value, selectedCategory);
+    const existingCount = counts.find(
+      (c) =>
+        c.user_id === Number(e.target.value) &&
+        c.category_id === Number(selectedCategory)
+    );
+    setCount(existingCount?.count.toString() || "0");
   };
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
-    updateCount(selectedUser, e.target.value);
-  };
-
-  const updateCount = (userId: string, categoryId: string) => {
-    if (userId && categoryId) {
-      const existingCount = counts.find(
-        (c) =>
-          c.user_id === Number(userId) && c.category_id === Number(categoryId)
-      );
-      setCount(existingCount?.count.toString() || "0");
-    }
+    const existingCount = counts.find(
+      (c) =>
+        c.user_id === Number(selectedUser) &&
+        c.category_id === Number(e.target.value)
+    );
+    setCount(existingCount?.count.toString() || "0");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedUser && selectedCategory && count) {
       try {
-        await api.setCount(
+        updateCount(
           Number(selectedUser),
           Number(selectedCategory),
           Number(count)
         );
-        window.location.reload();
+        toast.success("Muvaffaqiyatli saqlandi!");
+        setSelectedUser("");
+        setSelectedCategory("");
+        setCount("");
       } catch (error) {
-        console.error("Error setting count:", error);
+        console.log(error);
+        toast.error("Error saving count");
       }
+    } else {
+      toast.error("Please fill in all fields");
     }
   };
 
@@ -123,7 +132,9 @@ const ApplicationForm = () => {
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white appearance-none"
               />
             </div>
-            <Button type="submit" className="w-full">{t("applicationForm.submit")}</Button>
+            <Button type="submit" className="w-full">
+              {t("applicationForm.submit")}
+            </Button>
           </form>
         </div>
       </div>
