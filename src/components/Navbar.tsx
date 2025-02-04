@@ -3,6 +3,16 @@ import { useTranslation } from "react-i18next";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import SelectLang from "./commons/SelectLang";
+import { motion } from "framer-motion";
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" },
+  }),
+};
 
 export default function Navbar() {
   const { t } = useTranslation();
@@ -20,25 +30,36 @@ export default function Navbar() {
 
         <nav className="hidden lg:block">
           <ul className="flex items-center p-4 gap-8 font-medium">
-            <li>
-              <Link to="/">{t('nav.plan')}</Link>
-            </li>
-            <li>
-              <Link to="/">{t('nav.admissionRequirements')}</Link>
-            </li>
-            <li>
-              <Link to="/">{t('nav.instructions')}</Link>
-            </li>
-            <li>
-              <Link to="/">{t('nav.sorting')}</Link>
-            </li>
+            {[...Array(4)].map((_, index) => (
+              <motion.li
+                key={index}
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                custom={index}
+              >
+                <Link to="/">
+                  {t(
+                    `nav.${
+                      index === 0
+                        ? "plan"
+                        : index === 1
+                        ? "admissionRequirements"
+                        : index === 2
+                        ? "instructions"
+                        : "sorting"
+                    }`
+                  )}
+                </Link>
+              </motion.li>
+            ))}
           </ul>
         </nav>
 
         <div className="flex gap-4 items-center">
           <SelectLang />
           <button className="bg-[#252A3B] text-white px-4 sm:px-6 py-2 rounded-lg hover:bg-[#252A3B]/90 cursor-pointer transition-all duration-300 text-sm sm:text-base whitespace-nowrap">
-            {t('nav.takeTest')}
+            {t("nav.takeTest")}
           </button>
         </div>
 
@@ -55,16 +76,24 @@ export default function Navbar() {
           <nav className="p-4">
             <ul className="flex flex-col gap-6 font-medium">
               <li>
-                <Link to="/" onClick={() => setIsOpen(false)}>{t('nav.plan')}</Link>
+                <Link to="/" onClick={() => setIsOpen(false)}>
+                  {t("nav.plan")}
+                </Link>
               </li>
               <li>
-                <Link to="/" onClick={() => setIsOpen(false)}>{t('nav.admissionRequirements')}</Link>
+                <Link to="/" onClick={() => setIsOpen(false)}>
+                  {t("nav.admissionRequirements")}
+                </Link>
               </li>
               <li>
-                <Link to="/" onClick={() => setIsOpen(false)}>{t('nav.instructions')}</Link>
+                <Link to="/" onClick={() => setIsOpen(false)}>
+                  {t("nav.instructions")}
+                </Link>
               </li>
               <li>
-                <Link to="/" onClick={() => setIsOpen(false)}>{t('nav.sorting')}</Link>
+                <Link to="/" onClick={() => setIsOpen(false)}>
+                  {t("nav.sorting")}
+                </Link>
               </li>
             </ul>
           </nav>
