@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./assets/fonts/Gilroy-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: "Gilroy", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #252a3b;
+}

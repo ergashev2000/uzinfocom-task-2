@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "takeTest": "Sinovdan o'ting",
+    "plan": "Reja",
+    "admissionRequirements": "Qabul qilish talablari",
+    "instructions": "Ko'rsatmalar",
+    "sorting": "Saralash"
+  },
+  "hero": {
+    "title": "Sizning orzuingizdagi ish",
+    "subtitle": "bugun boshlang",
+    "participants": "kishi allaqachon o'z yo'nalishlari bo'yicha guruhlar a'zosi bo'lishdi",
+    "button": "Ariza qoldirish"
+  },
+  "features": {
+    "section1": {
+      "title": "Sayt ribatext dizayner va sahifalovchiga yordam beradi",
+      "description": "Ushbu sayt dizaynerlar va sahifalovchilar uchun matnlarni tekshirish va formatlashda yordam beradi. Bu loyihalash jarayonini soddalashtirishga xizmat qiladi."
+    },
+    "section2": {
+      "title": "Ikkinchi xususiyat sarlavhasi",
+      "description": "Ushbu bo'limda platformaning asosiy afzalliklari va foydalanuvchilarga qanday yordam berishi haqida ma'lumot beriladi."
+    }
+  },
+  "applicationForm": {
+    "title": "Ariza qoldirish",
+    "user": "Foydalanuvchi",
+    "category": "Kategoriya",
+    "count": "Soni",
+    "submit": "Yuborish"
+  },
+  "ratings": {
+    "title": "Ishtirokchilar reytingi",
+    "user": "Foydalanuvchi",
+    "total": "Jami"
+  }
+}
