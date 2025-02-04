@@ -24,7 +24,7 @@ A responsive React application built with TypeScript and Tailwind CSS.
 
 1. Clone the repository:
 ```bash
-git clone [your-repository-url]
+git clone https://github.com/ergashev2000/uzinfocom-task-2.git
 ```
 
 2. Install dependencies:
@@ -57,7 +57,3 @@ The application uses the following endpoints:
 - `/src/services` - API services
 - `/src/assets` - Static assets
 - `/src/types` - TypeScript types
-
-## Deployment
-
-The application can be deployed to platforms like Netlify, Vercel, or Render.
